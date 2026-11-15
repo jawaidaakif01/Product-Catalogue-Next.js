@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Learning Project (MyStore)
 
-## Getting Started
+A small app built to learn Next.js fundamentals: App Router, routing,
+Server and Client Components, API integration, Route Handlers, and Tailwind CSS.
 
-First, run the development server:
+## Tech used
+- Next.js (App Router), React, JavaScript
+- Tailwind CSS and CSS Modules
+- DummyJSON (external API)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## How to run
+1. Clone the repo
+2. `npm install`
+3. `npm run dev`
+4. Open http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
+- Home, About, and Products pages
+- Products list and detail pages using data from DummyJSON
+- Own API at `/api/items` with GET, POST, PUT, DELETE
+- "My Items" page to add, edit, and delete items
+- Responsive layout with a reusable Navbar, Card, Form, and Footer
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project structure
+app/
+page.js Home page
+layout.js Shared layout (Navbar, Footer)
+about/page.js About page
+products/page.js Products list (fetches DummyJSON)
+products/[id]/page.js Product detail (dynamic route)
+my-items/page.js Items manager page
+api/items/route.js GET all, POST
+api/items/[id]/route.js GET one, PUT, DELETE
+components/ Navbar, ProductCard, LikeButton, ItemForm, ItemManager, Footer
+data/items.js In-memory data for our own API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## What I learned
 
-To learn more about Next.js, take a look at the following resources:
+### 1. What is Next.js and why use it
+React builds the UI only. Next.js adds routing, a backend, and speed
+improvements in one framework.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. Routing (App Router)
+- A folder inside `app/` becomes a URL, and `page.js` is what is shown
+- `layout.js` is a shared frame, and `{children}` is where the page appears
+- `[id]` folders create dynamic routes
+- `Link` moves between pages without a full reload
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. Server and Client Components
+- Components are Server Components by default (run on the server)
+- `"use client"` is needed for state, clicks, and typing
+- Best practice: keep Client Components small, inside Server Components
+- Props pass data in, and state is data a component remembers
 
-## Deploy on Vercel
+### 4. Fetching data
+- Server Components can be `async`, so `await fetch()` works directly
+- `loading.js` and `error.js` handle waiting and failures
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 5. Own API (Route Handlers)
+- `route.js` creates an API address
+- Exported function names (`GET`, `POST`, `PUT`, `DELETE`) set the method
+- Status codes used: 200, 201, 404
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 6. Styling
+- Tailwind: small utility classes on elements, with `md:`/`lg:` for responsive
+- CSS Modules: a CSS file whose class names stay private to one component
+
+## Possible improvements
+- Store data in a real database instead of memory
+- Add search and filters
+- Add login
+- Deploy it (for example on Vercel)
